@@ -1,0 +1,57 @@
+package assignment2;
+
+public class Singer extends Person{
+	private String debutAlbum;
+	private Date debutAlbumReleaseDate;
+	public Singer(String name, 
+			Date dateOfBirth, 
+			String gender, 
+			String debutAlbum, 
+			Date debutAlbumReleaseDate,
+			double difficulty) {
+		super(name, dateOfBirth, gender, difficulty);
+		this.debutAlbum = debutAlbum;
+		this.debutAlbumReleaseDate = new Date (debutAlbumReleaseDate);
+	}
+	public Singer(String name, 
+			String dateString, 
+			String gender, 
+			String debutAlbum, 
+			String debutAlbumReleaseDateString,
+			double difficulty) {
+		super(name, dateString, gender, difficulty);
+		this.debutAlbum = debutAlbum;
+		this.debutAlbumReleaseDate = new Date (debutAlbumReleaseDateString);
+	}
+	public Singer(Singer singer) {
+		super(singer);
+		this.debutAlbum = singer.debutAlbum;
+		this.debutAlbumReleaseDate = new Date (singer.debutAlbumReleaseDate);
+	}
+	//Singer debutAlbum Accessors and Mutators
+	public String getDebutAlbum() {
+		return debutAlbum;
+	}
+	public void setDebutAlbum(String debutAlbum) {
+		this.debutAlbum = debutAlbum;
+	}
+	//Singer debutAlbum Accessors and Mutators
+	public Date getDebutAlbumReleaseDate() {
+		return debutAlbumReleaseDate;
+	}
+	public void setDebutAlbumReleaseDate (Date debutAlbumReleaseDate) {
+		this.debutAlbumReleaseDate = new Date (debutAlbumReleaseDate);
+	}
+	public void setDebutAlbumReleaseDate (String debutAlbumReleaseDateString) {
+		this.debutAlbumReleaseDate = new Date (debutAlbumReleaseDateString);
+	}
+	public Singer clone() {
+		return new Singer(this);
+	}
+	public String toString() {
+		return super.toString()+"Debut Album: "+getDebutAlbum()+"\nRelease Date: "+getDebutAlbumReleaseDate().toString()+"\n";
+	}
+	public String entityType() {
+		return "This entity is a singer!";
+	}
+}

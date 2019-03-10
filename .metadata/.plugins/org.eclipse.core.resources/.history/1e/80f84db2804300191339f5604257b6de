@@ -1,0 +1,72 @@
+package assignment1;
+
+public abstract class Entity {
+	private double difficulty;
+	private String name;
+	private Date born;
+	
+	//Constructors
+	public Entity (String name, 
+			Date dateOfBirth, 
+			double difficulty) {
+		this.name= name;
+		this.born = new Date(dateOfBirth); //Avoids privacy leak
+		this.difficulty = difficulty;
+	}
+	public Entity (String name, 
+			String dateString, 
+			double difficulty) {
+		this.name= name;
+		this.born = new Date(dateString);
+		this.difficulty = difficulty;
+	}
+	public Entity (Entity person) {
+		this.name= person.name;
+		this.born = new Date(person.born); //Avoids privacy leak
+		this.difficulty = person.difficulty;
+	}
+	//Entity Difficulty Accessors and Mutators
+	public double getDifficulty() {
+		return difficulty;
+	}
+	public void setDifficulty(double difficulty) {
+		this.difficulty = difficulty;
+	}
+	//Entity Date Accessors and Mutators
+	public Date getBorn() {
+		return born;
+	}
+	public void setBorn(Date dateOfBirth) {
+		this.born = new Date(dateOfBirth);
+	}
+	//Entity Name Accessors and Mutators
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	//Prints string of information about the entity
+	public String toString() {
+		return "Name: "+name+"\n"+"Born on: "+born.toString()+"\n";
+	}
+	//Checks if the two entities are equal
+	public boolean equals(Entity person) {
+		if (person ==  null) {
+			return false;
+		} else {
+			return (name == person.getName() && born.equals(person.getBorn()));
+		}
+	}
+	public int getAwardedTicketNumber(){
+		return (int)(difficulty*100);
+	}
+	public abstract String entityType();
+	public abstract Entity clone();
+	public String welcomeMessage(){
+		return "***************************\nWelcome! Let's start the game! This entity is a "+entityType()+"\n";
+	}
+	public String closingMessage(){
+		return "Congratulations! The detailed information of the entity you guessed is:\n "+toString();
+	}
+}

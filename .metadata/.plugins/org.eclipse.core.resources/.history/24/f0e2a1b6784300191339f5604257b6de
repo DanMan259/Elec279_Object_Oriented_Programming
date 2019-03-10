@@ -1,0 +1,41 @@
+package assignment1;
+
+public class Politician extends Person{
+	private String party;
+	public Politician(String name, 
+			Date dateOfBirth, 
+			double difficulty, 
+			String gender, 
+			String party) {
+		super(name, dateOfBirth,difficulty,gender);
+		this.party = party;
+	}
+	public Politician(String name, 
+			String dateString, 
+			double difficulty, 
+			String gender, 
+			String party) {
+		super(name, dateString,difficulty,gender);
+		this.party = party;
+	}
+	public Politician(Politician politician) {
+		super(politician);
+		this.party = politician.party;
+	}
+	//Politician debutAlbum Accessors and Mutators
+	public String getParty() {
+		return this.party;
+	}
+	public void setParty(String party) {
+		this.party = party;
+	}
+	public Politician clone() {
+		return new Politician(this);
+	}
+	public String toString() {
+		return super.toString()+"Party: "+getParty()+"\n";
+	}
+	public String entityType() {
+		return "This entity is a politician!";
+	}
+}

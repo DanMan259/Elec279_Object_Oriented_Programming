@@ -1,0 +1,7 @@
+
+public class Instructor extends Staff{
+	public String officeHour;
+	Instructor(){
+		position = "Teaching";
+	}
+}

@@ -1,0 +1,12 @@
+package assignment1;
+
+public class Entity {
+	private String name;
+	private Date born;
+	public Date getBorn() {
+		return born;
+	}
+	public void setBorn(Date born) {
+		this.born = born;
+	}
+}

@@ -1,0 +1,105 @@
+package assignment1;
+
+import java.util.Scanner;
+import java.util.Random;
+
+public class GuessMaster {
+	private int numOfEntities;
+	private int totalTickets;
+	private Entity[] entities;
+
+	public GuessMaster() {
+		numOfEntities = 0;
+		totalTickets = 0;
+		entities = new Entity[20];
+	}
+	
+	//GuessMaster numOfEntities Accessor
+	public int getNumOfEntities() {
+		return numOfEntities;
+	}
+	//GuessMaster totalTickets Accessor and Mutator
+	public int getTotalTickets() {
+		return totalTickets;
+	}
+	
+	public void addTotalTickets(int ticketsAdded) {
+		totalTickets+=ticketsAdded;
+	}
+	
+	public void addEntity(Entity entity) {
+		entities[numOfEntities++] = entity.clone();
+	}
+		
+	public void playGame(Entity entity) {
+		// Complete Game
+		Scanner scanner = new Scanner(System.in);
+		String response;
+		Date date;
+		// Starts the game
+		System.out.println(entity.welcomeMessage());
+		System.out.println("Guess " + entity.getName() + "'s birthday\n(mm/dd/yyyy)");
+		while (true) {
+			
+			// Lets the user keep guessing until a correct response is given
+			response = scanner.nextLine();
+			response = response.replace("\n", "").replace("\r", "").trim();
+			// Looks at whether the response is quit
+			if (response.equalsIgnoreCase("quit")) {
+				System.out.println("Ending Game");
+				System.exit(0);
+			}
+			// Checks for valid input
+			if (Date.validDateAndFormat(response)) {
+				date = new Date(response);
+				// Checks whether the date is before, after, or equal
+				if (entity.getBorn().precedes(date)) {
+					System.out.println("That above date is too late try a earlier date");
+				} else if (date.precedes(entity.getBorn())) {
+					System.out.println("That above date is too early try a later date");
+				} else {
+					addTotalTickets(entity.getAwardedTicketNumber());
+					System.out.println("*************Bingo!***************");
+					System.out.println("You won "+entity.getAwardedTicketNumber()+" tickets in this round.");
+					System.out.println("The total number of your tickets is "+getTotalTickets());
+					break;
+				}
+			} else {
+				System.out.println("Incorrect Date Response");
+			}
+
+		}
+	}
+
+	public void playGame(int entityID) {
+		// This plays the game with an entity choosen from the array
+		playGame(entities[entityID]);
+	}
+
+	public void playGame() {
+		// This plays the game with random entities
+		while (true) {
+			playGame(genRandomEntityId());
+		}
+	}
+
+	public int genRandomEntityId() {
+		// This generates a randomID for the user to play with
+		Random randomNum = new Random();
+		return randomNum.nextInt(numOfEntities);
+	}
+
+	public static void main(String[] args) {
+		// Making Three new entities
+		Entity trudeau = new Entity("Justin Trudeau", new Date("December", 25, 1971));
+		Entity dion = new Entity("Celine Dion", new Date("March", 30, 1968));
+		Entity usa = new Entity("United States", new Date("July", 4, 1776));
+		// Making a new game
+		GuessMaster gm = new GuessMaster();
+		gm.addEntity(trudeau);
+		gm.addEntity(dion);
+		gm.addEntity(usa);
+		// Starting the game
+		gm.playGame();
+	}
+}

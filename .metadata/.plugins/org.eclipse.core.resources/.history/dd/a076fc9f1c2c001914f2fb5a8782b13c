@@ -1,0 +1,30 @@
+package assignment1;
+
+public class Entity {
+	private String name;
+	private Date born;
+	public Entity (String name, Date dateOfBirth) {
+		this.name= name;
+		this.born = new Date(dateOfBirth);//
+	}
+	public Entity (Entity person) {
+		this.name= person.name;
+		this.born = new Date(person.born);//
+	}
+	public Date getBorn(Entity person) {
+		return born;
+	}
+	public void setBorn(Date dateOfBirth) {
+		this.born = new Date(dateOfBirth);
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String toString() {
+		//
+		return "Name: "+name+"\n"+"Born on: "+born.toString()+"\n";
+	}
+}

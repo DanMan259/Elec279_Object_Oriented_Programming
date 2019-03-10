@@ -1,0 +1,72 @@
+package assignment1;
+import java.util.Scanner;
+import java.util.Random;
+
+public class GuessMaster {
+	private int numOfEntities;
+	private Entity[] entities;
+	public GuessMaster() {
+		numOfEntities = 0;
+		entities = new Entity[20];
+	}
+	public void addEntity(Entity person) {
+		entities[numOfEntities++] = new Entity(person);
+	}
+	public void playGame(Entity person) {
+		Scanner scanner = new Scanner(System.in);
+		String response;
+		//
+		System.out.printf("\nGuess %s's information\n", person.getName());
+		System.out.printf("Put %s's birthdate as (mm/dd/yyyy) format\n", person.getName());
+		
+		while (true){
+			response = scanner.nextLine();
+			response = response.replace("\n", "").replace("\r", "");
+			response = response.toLowerCase();
+			
+			if (response == "quit") {
+				System.out.println("Ending Game");
+				System.exit(0);
+			}
+			
+			Date date = new Date(response);
+			
+			if (date.precedes(entity.getBorn())) {
+				System.out.println("That date is too early try a later date");
+			} else if (entity.getBorn().precedes(date)) {
+				System.out.println("That date is too late try a earlier date");
+			} else {
+				System.out.println("You got it good job!!");
+				break;
+			}
+		}
+	}
+	public void playGame(int personID) {
+		Entity person = entities[personID];
+		playGame(person);
+	}
+	public void playGame() {
+		while (true) {
+			//IDK HOW TO IMPLEMENT QUIT
+			int nextID = genRandomEntityId();
+			playGame(nextID);
+		}
+	}
+	public int genRandomEntityId(){
+		Random randomNum = new Random();
+		return randomNum.nextInt(numOfEntities);
+	}
+	public static void main(String[] args) {
+		//
+		Entity trudeau = new Entity("Justin Trudeau", new Date("December", 25, 1971));
+		Entity dion = new Entity("Celine Dion", new Date("March", 30, 1968));
+		Entity usa = new Entity("United States", new Date("July", 4, 1776));
+		//
+		GuessMaster gm = new GuessMaster();
+		gm.addEntity(trudeau);
+		gm.addEntity(dion);
+		gm.addEntity(usa);
+		//
+		gm.playGame();
+	}
+}

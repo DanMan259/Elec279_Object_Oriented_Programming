@@ -1,0 +1,6 @@
+package assignment1;
+
+public class Entity {
+	private String name;
+	private Date born;
+}

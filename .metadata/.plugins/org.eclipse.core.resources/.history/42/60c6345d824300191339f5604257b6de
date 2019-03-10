@@ -1,0 +1,39 @@
+package assignment1;
+
+public class Country extends Entity{
+	private String capital;
+	public Country(String name, 
+			Date dateOfBirth, 
+			String capital,
+			double difficulty) {
+		super(name, dateOfBirth,difficulty);
+		this.capital = capital;
+	}
+	public Country(String name, 
+			String dateString, 
+			String capital, 
+			double difficulty) {
+		super(name, dateString,difficulty);
+		this.capital = capital;
+	}
+	public Country(Country country) {
+		super(country);
+		this.capital = country.capital;
+	}
+	//Country Capital Accessors and Mutators
+	public String getCapital() {
+		return capital;
+	}
+	public void setCapital(String capital) {
+		this.capital = capital;
+	}
+	public Country clone() {
+		return new Country(this);
+	}
+	public String toString() {
+		return super.toString()+"Capital:"+getCapital()+"\n";
+	}
+	public String entityType() {
+		return "This entity is a country!";
+	}
+}
