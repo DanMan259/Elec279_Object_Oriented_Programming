@@ -1,3 +1,6 @@
+//Daniyal Maniar
+//20064993
+
 package assignment2;
 
 public abstract class Entity {
@@ -20,10 +23,10 @@ public abstract class Entity {
 		this.born = new Date(dateString);
 		this.difficulty = difficulty;
 	}
-	public Entity (Entity person) {
-		this.name= person.name;
-		this.born = new Date(person.born); //Avoids privacy leak
-		this.difficulty = person.difficulty;
+	public Entity (Entity entity) {
+		this.name= entity.name;
+		this.born = new Date(entity.born); //Avoids privacy leak
+		this.difficulty = entity.difficulty;
 	}
 	//Entity Difficulty Accessors and Mutators
 	public double getDifficulty() {
@@ -34,9 +37,12 @@ public abstract class Entity {
 	}
 	//Entity Date Accessors and Mutators
 	public Date getBorn() {
-		return born;
+		return new Date(born);
 	}
 	public void setBorn(Date dateOfBirth) {
+		this.born = new Date(dateOfBirth);
+	}
+	public void setBorn(String dateOfBirth) {
 		this.born = new Date(dateOfBirth);
 	}
 	//Entity Name Accessors and Mutators
@@ -48,7 +54,7 @@ public abstract class Entity {
 	}
 	//Prints string of information about the entity
 	public String toString() {
-		return "Name: "+name+"\n"+"Born at: "+born.toString()+"\n";
+		return "Name: "+name+"\nBorn at: "+born.toString()+"\n";
 	}
 	//Checks if the two entities are equal
 	public boolean equals(Entity person) {
@@ -58,14 +64,18 @@ public abstract class Entity {
 			return (name == person.getName() && born.equals(person.getBorn()));
 		}
 	}
+	//Get tickets based off the difficulty of the entity
 	public int getAwardedTicketNumber(){
 		return (int)(difficulty*100);
 	}
+	//Abstact methods for the abstract class
 	public abstract String entityType();
 	public abstract Entity clone();
+	//Defines Welcome message based off the derived class
 	public String welcomeMessage(){
-		return "Welcome! Let's start the game! This entity is a "+entityType()+"\n";
+		return "Welcome! Let's start the game! "+entityType()+"\n";
 	}
+	//Defines Closing message based off the entity details
 	public String closingMessage(){
 		return "Congratulations! The detailed information of the entity you guessed is:\n"+toString();
 	}

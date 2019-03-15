@@ -1,3 +1,6 @@
+//Daniyal Maniar
+//20064993
+
 package assignment2;
 import java.util.Scanner;
 

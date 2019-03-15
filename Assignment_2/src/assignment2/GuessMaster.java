@@ -1,3 +1,6 @@
+//Daniyal Maniar
+//20064993
+
 package assignment2;
 
 import java.util.Scanner;
@@ -68,7 +71,7 @@ public class GuessMaster {
 		}
 	}
 	public void playGame(int entityID) {
-		// This plays the game with an entity choosen from the array
+		// This plays the game with an entity chosen from the array
 		playGame(entities[entityID]);
 	}
 	public void playGame() {
